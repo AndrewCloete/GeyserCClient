@@ -3,7 +3,6 @@
 #include <curl/curl.h> //Replace with AT commands API
 #include <string.h>
 #include "scl_api.h"
-#include "base64.h"
 
 #define BASIC_AUTH "admin:admin"
 
@@ -40,9 +39,7 @@ int createGeyserApplication(const char *base_url, int geyser_id){
   sprintf(app_url, "%sapplications/", base_url);
   sprintf(app_xml, "<om2m:application xmlns:om2m=\"http://uri.etsi.org/m2m\" appId=\"geyser_%d\">"
       "<om2m:searchStrings>"
-          "<om2m:searchString>Type/sensor</om2m:searchString>"
-          "<om2m:searchString>Category/appliance</om2m:searchString>"
-          "<om2m:searchString>Location/Home</om2m:searchString>"
+          "<om2m:searchString>Type/geyser</om2m:searchString>"
        "</om2m:searchStrings>"
   "</om2m:application>", geyser_id);
 
@@ -166,8 +163,6 @@ int readGeyserLatestContentInstance(char *reply, const char *base_url, int geyse
 
   long http_status_code = 0;
   char content_instance_url[300];
-  char content[2048];
-  const char *start_str = "<om2m:content xmime:contentType=\"application/xml\">";
 
   // Do GET request ----------------------------------------------------------
   CURL *curl;
@@ -182,7 +177,7 @@ int readGeyserLatestContentInstance(char *reply, const char *base_url, int geyse
   curl_global_init(CURL_GLOBAL_ALL); // get a curl handle
   curl = curl_easy_init();
 
-  sprintf(content_instance_url, "%sapplications/geyser_%d/containers/%s/contentInstances/latest", base_url, geyser_id, container_id);
+  sprintf(content_instance_url, "%sapplications/geyser_%d/containers/%s/contentInstances/latest/content", base_url, geyser_id, container_id);
 
   if(curl) {
 
@@ -200,14 +195,7 @@ int readGeyserLatestContentInstance(char *reply, const char *base_url, int geyse
    if(res != CURLE_OK){
      fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(res));
    }else{
-      //printf("%s\n", chunk.memory);
-      size_t start_length = strlen(start_str);
-
-      strcpy(content, strchr(strstr(chunk.memory, "<om2m:content xmime:contentType=\"application/xml\">"), '>')+1);
-      *strchr(content, '<') = '\0';
-
-      Base64decode(content, content);
-      strcpy(reply, content);
+      strcpy(reply, chunk.memory);
    }
 
 

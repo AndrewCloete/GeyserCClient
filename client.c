@@ -35,8 +35,8 @@ int main(void){
     printf("Container %s already exists\n", "SETTINGS");
   }
 
-  createGeyserContentInstance(base_url, geyser_id, "DATA", "{\'Ver\':20,\'ID\':104,\'Vstate\':\'OPEN\',\'Rstate\':\'ON\',\'Gstate\':\'OK\',\'T1\':47,\'T2\':40,\'T3\':18,\'T4\':18,\'KW\':0.005545,\'KWH\':1.004138,\'HLmin\':0.000000,\'CLmin\':0.000000,\'HLtotal\':7.840000,\'CLtotal\':0.000000,\'Tstamp\':1444632273}");
-  readGeyserLatestContentInstance(received_content, base_url, geyser_id, "DATA");
+  createGeyserContentInstance(base_url, geyser_id, "DATA", "{\"Ver\":20,\"ID\":104,\"Vstate\":\"OPEN\",\"Rstate\":\"ON\",\"Gstate\":\"OK\",\"T1\":47,\"T2\":40,\"T3\":18,\"T4\":18,\"KW\":0.005545,\"KWH\":1.004138,\"HLmin\":0.000000,\"CLmin\":0.000000,\"HLtotal\":7.840000,\"CLtotal\":0.000000,\"Tstamp\":1444632273}");
+  readGeyserLatestContentInstance(received_content, base_url, geyser_id, "SETTINGS");
   printf("Recieved: \"%s\"\n", received_content);
 
   return 0;

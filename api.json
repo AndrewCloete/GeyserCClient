@@ -1,0 +1,43 @@
+
+# From client datapoint
+{
+  "id": 210,
+  "unix_stamp": 1444632273,
+  "energy_kwh": {
+    "today": 12.6,
+    "minute": 3.1
+  },
+  "state": {
+    "relay": true,
+    "valve": false,
+    "drip": false
+  },
+  "temp_c": {
+    "out": 55,
+    "far": 38,
+    "in": 17,
+    "amb": 25,
+    "sol": null
+  },
+  "water_l": {
+    "hot": {
+      "today": 120,
+      "now": 4.5
+    },
+    "cold": {
+      "today": 316.5,
+      "now": 0
+    }
+  },
+  "system": {
+    "ver": 30,
+    "data_kb": 2000,
+    "uptime_m": 261,
+    "watchdog_count": 2
+  }
+}
+
+# To client command.
+{
+  "command":"hello"
+}
