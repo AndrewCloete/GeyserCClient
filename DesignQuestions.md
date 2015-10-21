@@ -23,7 +23,7 @@ ATxmega128A4-AU:
 ### Architectural design options.
 
 First of all **make sure to fully understand the REST API of OM2M**. From there
-on I can think of 4 possible architectures:
+on I can think of a couple of possible architectures:
 
 1. Full ETSI REST client.
 
@@ -56,7 +56,21 @@ on I can think of 4 possible architectures:
     ETSI M2M compliant. The geyser clients in turn will be unaware of the SCL and
     will only think that it is talking to yet another *ad hoc* M2M solution.
 
+5. Wakaama client.
 
+    **First learn C better and understand function pointers.** Then evaluate the
+    Wakaama client and decide whether it is feasible to use it as a client. This
+    will include:
+    * Figuring out how to implement the UDP-IP layer on the Atmel
+    * Understanding how the LWM2M protocol works.
+    * Understanding how LWM2M fits into the new oneM2M complaint OM2M platform.
+
+    The following is still unclear to me about the LWM2M protocol.
+    * How it fits into oneM2M
+    * How DTSL and and security keys work (pre-shared and public keys).
+    * What the objects structure look like and how they are serialized.
+    * How objects get populated with measurement data.
+    
 ### Embedded questions
 * Is XML feasible?
 * We plan on using AT+HTTP commands, which stores all results as files on the modem:
